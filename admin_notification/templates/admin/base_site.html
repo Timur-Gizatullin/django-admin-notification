@@ -24,7 +24,15 @@
        <span id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></span>
     </h1>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js"></script>
+
     <script>
+        var sound = new Howl({
+            src: ["{% static 'admin_notification/sound/zvuk-vsplyvaushego-okoshka.mp3' %}"],
+            volume: 0.5,
+            loop: false,
+        });
+
         const notificationSocket = new WebSocket(
             'ws://'
             + window.location.host
