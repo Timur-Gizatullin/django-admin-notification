@@ -7,6 +7,7 @@ from django.shortcuts import HttpResponse, redirect
 from django.apps import apps as django_apps
 from admin_notification.models import Notification
 from django.dispatch import receiver
+from asgiref.sync import async_to_sync
 from admin_notification.notification_consumer import NotificationConsumer
 from channels.layers import get_channel_layer
 import asyncio
@@ -33,4 +34,5 @@ def post_save_handler(sender, **kwargs):
             "type": "create_notification",
             "message": str(notification.count)
         }
-        channel_layer.group_send(group_name, content)
+
+        async_to_sync(channel_layer.group_send)(group_name, content)
