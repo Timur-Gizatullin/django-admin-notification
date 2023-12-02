@@ -7,7 +7,7 @@ from django.shortcuts import HttpResponse, redirect
 from django.apps import apps as django_apps
 from admin_notification.models import Notification
 from django.dispatch import receiver
-from notification_consumer import NotificationConsumer
+from admin_notification.notification_consumer import NotificationConsumer
 import asyncio
 
 try:
