@@ -27,9 +27,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js"></script>
 
     <script>
-        var sound = new Howl({
-            src: ["{% static 'admin_notification/img/zvuk-vsplyvaushego-okoshka.mp3' %}"],
-            volume: 1
+        let file2 = new Howl({
+            src: 'https://zvukitop.com/wp-content/uploads/2021/03/zvuk-vsplyvaushego-okoshka.mp3',
+            html5: true,
+            format: ['mp3', 'aac']
         });
 
         const notificationSocket = new WebSocket(
