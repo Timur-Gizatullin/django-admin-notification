@@ -35,4 +35,6 @@ def post_save_handler(sender, **kwargs):
             "message": str(notification.count)
         }
 
-        async_to_sync(channel_layer.group_send)(group_name, content)
+        res = async_to_sync(channel_layer.group_send)(group_name, content)
+
+        print(f"ws result is {res}")
