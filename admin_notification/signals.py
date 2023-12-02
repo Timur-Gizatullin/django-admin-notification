@@ -8,6 +8,7 @@ from django.apps import apps as django_apps
 from admin_notification.models import Notification
 from django.dispatch import receiver
 from admin_notification.notification_consumer import NotificationConsumer
+from channels.layers import get_channel_layer
 import asyncio
 
 try:
@@ -25,17 +26,11 @@ def post_save_handler(sender, **kwargs):
         notification.count += 1
         notification.save()
 
-        async def send_message_to_consumer(notification_count: str):
-            notification_consumer = NotificationConsumer()
-            await notification_consumer.connect()
+        channel_layer = get_channel_layer()
 
-            event = {
-                "type": "create_notification",
-                "message": notification_count
-            }
-
-            await notification_consumer.send_message(event=event)
-            await notification_consumer.disconnect(code="0")
-
-        asyncio.get_event_loop().run_until_complete(send_message_to_consumer(notification_count=notification.count))
-
+        group_name = "notification"
+        content = {
+            "type": "create_notification",
+            "message": str(notification.count)
+        }
+        channel_layer.group_send(group_name, content)
