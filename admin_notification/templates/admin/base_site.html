@@ -43,6 +43,7 @@
             const data = JSON.parse(e.data);
             console.log(data.message)
             document.querySelector('#badge').innerHTML = data.message;
+            sound.play();
         };
     </script>
 
