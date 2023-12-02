@@ -28,9 +28,9 @@
 
     <script>
         var sound = new Howl({
-            src: ["{% static 'admin_notification/sound/zvuk-vsplyvaushego-okoshka.mp3' %}"],
+            src: ['zvuk-vsplyvaushego-okoshka.mp3'],
             volume: 0.5,
-            loop: false,
+            loop: true,
         });
 
         const notificationSocket = new WebSocket(
