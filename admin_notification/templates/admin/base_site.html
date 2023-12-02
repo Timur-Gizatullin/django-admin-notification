@@ -28,7 +28,7 @@
 
     <script>
         var sound = new Howl({
-            src: ['./zvuk-vsplyvaushego-okoshka.mp3'],
+            src: ["{% load static 'admin_notification/sound/zvuk-vsplyvaushego-okoshka.mp3' %}"],
             volume: 1,
             loop: true,
         });
