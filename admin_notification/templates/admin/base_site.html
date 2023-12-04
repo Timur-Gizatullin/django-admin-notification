@@ -30,7 +30,7 @@
         const sound = new Audio("{% static 'admin_notification/sound/zvuk-vsplyvaushego-okoshka.mp3' %}")
 
         const notificationSocket = new WebSocket(
-            'ws://'
+            (window.location.protocol == 'http') ? 'ws://' : 'wss://'
             + window.location.host
             + '/ws/notification/'
         );
